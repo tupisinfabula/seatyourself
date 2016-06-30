@@ -1,0 +1,34 @@
+<h1>Add a Reservation</h1>
+
+<p>
+  Hi <%= current_user.username %>!!! <br>
+  Please confirm your reservation at <%= @restaurant.name %>.
+</p>
+
+People: <%= @search.people %><br />
+Time: <%= @search.time %>
+Hour: <%= @search.hour %>
+
+<%= form_for [@restaurant, @reservation]  do |f| %>
+
+
+<%= f.hidden_field :people, :value => @search.people %>
+<%= f.hidden_field :time, :value => @search.time %>
+<%= f.hidden_field :hour, :value => @search.hour %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<% if @reservation.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved. </h2>
+
+    <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+  </div>
+<% end %>

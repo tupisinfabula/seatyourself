@@ -1,0 +1,57 @@
+<div class="center">
+<h1>My Profile</h1>
+
+  <p>
+    <b>Name:</b>  <%= current_user.username %> <br>
+    <b>Email:</b>  <%= current_user.email %> <br>
+    <b>Phone:</b>  <%= current_user.phone %> <br>
+  </p>
+
+  <%= link_to "Back to Restaurants", restaurant_url %> | <%= link_to "Add a New Restaurant", new_restaurant_url %>
+
+<h2>My Reservations</h2>
+
+<table>
+    <tr>
+      <th><b>Date and Time</b></th>
+      <th><b>Guests</b></th>
+      <th><b>Customer</b></th>
+    </tr>
+  <% @reservations.each do |reservation| %>
+    <tr>
+      <td><%= reservation.time %> </td>
+      <td><%= reservation.people %></td>
+      <td><%= reservation.restaurant_id %></td>
+    <tr>
+  <% end %>
+</table>
+
+
+<h2>My Restaurants:</h2>
+  <% @restaurants.each do |list| %>
+    <% if @current_user.user_id == restaurant.user.user_id %>
+    <%= current_user.restaurant.name %>
+    <% end %>
+  <% end %>
+
+<h2>Reservations For Restaurant</h2>
+
+  <% @users.restaurants.each do |restaurant| %>
+    <% if current_user == restaurant.user_id %>
+      <table>
+        <tr>
+          <th><b>Date and Time</b></th>
+          <th><b>Guests</b></th>
+          <th><b>Customer</b></th>
+        </tr>
+
+        <% @restaurant.reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.time %></td>
+            <td><%= reservation.people %></td>
+            <td><%= reservation.user.username %></td>
+          <tr>
+          <% end %>
+    <% end %>
+  <% end %>
+</table>
